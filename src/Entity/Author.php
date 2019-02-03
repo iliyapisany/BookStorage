@@ -41,6 +41,12 @@ class Author
     private $patronymic = '';
 
     /**
+     * @var array
+     * @ORM\ManyToMany(targetEntity="Book", mappedBy="id")
+     */
+    private $writed_books = [];
+
+    /**
      * @return string
      */
     public function getLastName(): string
@@ -86,6 +92,22 @@ class Author
     public function setPatronymic(string $patronymic): void
     {
         $this->patronymic = $patronymic;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWritedBooks(): array
+    {
+        return $this->writed_books;
+    }
+
+    /**
+     * @param array $writed_books
+     */
+    public function setWritedBooks(array $writed_books): void
+    {
+        $this->writed_books = $writed_books;
     }
 
     public function shortName() {

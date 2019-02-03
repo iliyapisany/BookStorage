@@ -40,6 +40,12 @@ class Book
      */
     private $page_num = 0;
 
+    /**
+     * @var array
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="id")
+     */
+    private $authors = [];
+
 
     public function getId(): ?int
     {
@@ -109,6 +115,22 @@ class Book
     public function setPageNum(int $page_num): void
     {
         $this->page_num = $page_num;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthors(): array
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param array $authors
+     */
+    public function setAuthors(array $authors): void
+    {
+        $this->authors = $authors;
     }
 
     public function year() {
