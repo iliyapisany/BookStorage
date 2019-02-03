@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="col-12 p-4">
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="row">
+            <a href="{{ path('CreateAuthor') }}" class="text-right col-12">Создать автора</a>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-12 col-md-6 p-2">
+                <div class="bg-light px-2 py-1">
+                    <p class="text-left">Автор: <h4 class="ml-3"><a href="{{ path('EditAuthor', {'id': 1}) }}">Джеймс Куроуз</a></h4></p>
+                    <p class="text-left">Количество книг: <span>1</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
