@@ -92,4 +92,9 @@ class Book
     public function year() {
         return $this->publicated_year->format('Y');
     }
+
+    public function __construct()
+    {
+        $this->publicated_year = new \DateTime();
+    }
 }
