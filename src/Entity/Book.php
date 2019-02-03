@@ -23,7 +23,7 @@ class Book
     private $name = '';
 
     /**
-     * @var integer
+     * @var \DateTime
      * @ORM\Column(type="date")
      */
     private $publicated_year = 0;
@@ -92,5 +92,9 @@ class Book
     public function setISBN(string $ISBN): void
     {
         $this->ISBN = $ISBN;
+    }
+
+    public function year() {
+        return $this->publicated_year->format('Y');
     }
 }
