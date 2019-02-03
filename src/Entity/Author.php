@@ -25,19 +25,19 @@ class Author
      * @var string
      * @ORM\Column(type="string", length=30)
      */
-    private $last_name;
+    private $last_name = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=20)
      */
-    private $first_name;
+    private $first_name = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=23)
      */
-    private $patronymic;
+    private $patronymic = '';
 
     /**
      * @return string
