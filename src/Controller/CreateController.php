@@ -6,7 +6,9 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Form\AuthorType;
 use App\Form\BookType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,13 +53,18 @@ class CreateController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $db = $this->getDoctrine()->getManager();
             $db->persist($Author);
-            $db->flush();
-            return $this->redirectToRoute('Authors');
+            try{
+                $db->flush();
+                return $this->redirectToRoute('Authors');
+            }
+            catch (UniqueConstraintViolationException $exception) {
+                $form->addError(new FormError('Указанный ФИО уже существует'));
+            }
         }
 
 
         return $this->render('edit/base_create_form.html.twig', [
-
+            'form' => $form->createView(),
         ]);
     }
 }
