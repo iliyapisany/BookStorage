@@ -61,12 +61,7 @@ class Book
      */
     public function getPublicatedYear(): \DateTime
     {
-        /** @var \DateTime $dt */
-        $dt = new \DateTime();
-
-        $dt->setTimestamp($this->publicated_year);
-
-        return $dt;
+        return $this->publicated_year;
     }
 
     /**
