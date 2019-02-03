@@ -31,8 +31,9 @@ class ShowController extends AbstractController
      * @Route("/books", name="Books")
      */
     public function books() {
+        $Books = $this->getDoctrine()->getRepository(Book::class)->findAll();
         return $this->render('show/books.html.twig', [
-
+            'Books' => $Books,
         ]);
     }
 
