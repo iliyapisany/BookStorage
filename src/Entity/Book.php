@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
+ * @ORM\Entity(repositoryClass="BookRepository")
  */
-class Author
+class Book
 {
     /**
      * @ORM\Id()
@@ -20,19 +20,19 @@ class Author
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var integer
      * @ORM\Column(type="date")
      */
-    private $publicated_year;
+    private $publicated_year = 0;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=20)
      */
-    private $ISBN;
+    private $ISBN = '';
 
 
     public function getId(): ?int
@@ -59,16 +59,22 @@ class Author
     /**
      * @return int
      */
-    public function getPublicatedYear(): int
+    public function getPublicatedYear(): \DateTime
     {
-        return $this->publicated_year;
+        /** @var \DateTime $dt */
+        $dt = new \DateTime();
+
+        $dt->setTimestamp($this->publicated_year);
+
+        return $dt;
     }
 
     /**
      * @param int $publicated_year
      */
-    public function setPublicatedYear(int $publicated_year): void
+    public function setPublicatedYear($publicated_year): void
     {
+        /** @var \DateTime $publicated_year */
         $this->publicated_year = $publicated_year;
     }
 
