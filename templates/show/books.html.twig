@@ -17,7 +17,7 @@
                             <li>&laquo;{{ book.name }}&raquo;</li>
                             <li>Год: {{ book.year }}</li>
                             <li>ISBN: {{ book.ISBN }}</li>
-                            <li>Количество страниц: 908</li>
+                            <li>Количество страниц: {{ book.pageNum }}</li>
                         </ul>
                     </a>
                     <a href="{{ path('DeleteBook', {'id': book.id}) }}">Удалить книгу</a>
