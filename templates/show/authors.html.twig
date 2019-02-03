@@ -7,12 +7,14 @@
         </div>
         {% endif %}
         <div class="row">
+            {% for author in Authors %}
             <div class="col-12 col-md-6 p-2">
                 <div class="bg-light px-2 py-1">
-                    <p class="text-left">Автор: <h4 class="ml-3"><a href="{{ path('EditAuthor', {'id': 1}) }}">Джеймс Куроуз</a></h4></p>
+                    <p class="text-left">Автор: <h4 class="ml-3"><a href="{{ path('EditAuthor', {'id': author.id}) }}">{{ author.shortName }}</a></h4></p>
                     <p class="text-left">Количество книг: <span>1</span></p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

@@ -43,8 +43,9 @@ class ShowController extends AbstractController
      * @Route("/authors", name="Authors");
      */
     public function authors() {
+        $Authors = $this->getDoctrine()->getRepository(Author::class)->findAll();
         return $this->render('show/authors.html.twig', [
-
+            'Authors' => $Authors,
         ]);
     }
 }
