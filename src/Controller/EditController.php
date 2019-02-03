@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use App\Form\AuthorType;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +37,39 @@ class EditController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $db = $this->getDoctrine()->getManager();
             $db->persist($Book);
+            $db->flush();
+        }
+
+        return $this->render('edit/base_create_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/author/{id<\d+>}", name="EditAuthor")
+     */
+    public function Author($id, Request $request) {
+        /** @var BookRepository $AuthorRepository */
+        $AuthorRepository = $this->getDoctrine()->getRepository(Author::class);
+
+        /** @var Book $Author */
+        $Author = $AuthorRepository->find($id);
+
+        if($Author == null) {
+            return $this->redirectToRoute('CreateAuthor');
+        }
+
+
+        $form = $this->createForm(AuthorType::class, $Author);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $db = $this->getDoctrine()->getManager();
+            $db->persist($Author);
             $db->flush();
         }
 
