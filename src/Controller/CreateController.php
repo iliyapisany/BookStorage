@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use App\Form\AuthorType;
 use App\Form\BookType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,8 +41,22 @@ class CreateController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/author/create", name="CreateAuthor")
      */
-    public function CreateAuthor() {
-        return $this->render('edit/author.html.twig', [
+    public function CreateAuthor(Request $request) {
+        $Author = new Author();
+
+        $form = $this->createForm(AuthorType::class, $Author);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $db = $this->getDoctrine()->getManager();
+            $db->persist($Author);
+            $db->flush();
+            return $this->redirectToRoute('Authors');
+        }
+
+
+        return $this->render('edit/base_create_form.html.twig', [
 
         ]);
     }
