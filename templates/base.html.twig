@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Book storage{% endblock %}</title>
+    {% include 'components/bootstrap.html.twig' %}
+    {% include 'components/jquery.html.twig' %}
+</head>
+<body lang="{% block BodyLang %}ru{% endblock %}">
+    {% include 'structure/header/main.html.twig' %}
+    <div class="container">
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

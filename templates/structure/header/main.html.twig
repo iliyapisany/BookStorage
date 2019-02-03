@@ -1,0 +1,22 @@
+{% set IndexPath = path('Index') %}
+<nav class="navbar bg-light navbar-light navbar-expand-lg sticky-top">
+    <a href="{{ IndexPath }}" class="navbar-brand">Book storage</a>
+    <div class="collapse navbar-collapse" id="NavbarContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ IndexPath }}" class="nav-link">Каталог</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('Books') }}" class="nav-link">Книги</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('Authors') }}" class="nav-link">Авторы</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Авторизация</a>
+            </li>
+        </ul>
+    </div>
+</nav>
