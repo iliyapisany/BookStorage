@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
+use App\Entity\Book;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +14,15 @@ class ShowController extends AbstractController
      */
     public function index()
     {
+        $BookRepository = $this->getDoctrine()->getRepository(Book::class);
+        $AuthorRepository = $this->getDoctrine()->getRepository(Author::class);
+
+        $Books = $BookRepository->findAll();
+        $Authors = $AuthorRepository->findAll();
+
         return $this->render('show/index.html.twig', [
-            'controller_name' => 'MainController',
+            'Books' => $Books,
+            'Authors' => $Authors,
         ]);
     }
 
