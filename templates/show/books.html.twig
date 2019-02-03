@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="col-12 p-4">
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="row">
+            <a href="{{ path('CreateBook') }}" class="text-right col-12">Создать книгу</a>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-12 col-md-4 p-3">
+                <div class="bg-light p-3">
+                    {% set BookEditPath = path('EditBook', {'id': 1}) %}
+                    <a href="{{ BookEditPath }}"><img src="https://s1.1zoom.ru/b5050/137/371625-svetik_2880x1800.jpg" width="100%"></a>
+                    <a href="{{ BookEditPath }}">
+                        <ul class="list-unstyled">
+                            <li>&laquo;Компьютерные сети. Нисходящий подход.&raquo;</li>
+                            <li>Год: 2016</li>
+                            <li>ISBN: 877-234-234-44</li>
+                            <li>Количество страниц: 908</li>
+                        </ul>
+                    </a>
+                    <ul class="list-unstyled text-right">
+                        <p>Авторы:</p>
+                        <li>Джеймс Куроуз</li>
+                        <li>Кит Росс</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
