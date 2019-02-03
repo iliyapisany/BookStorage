@@ -34,6 +34,12 @@ class Book
      */
     private $ISBN = '';
 
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private $page_num = 0;
+
 
     public function getId(): ?int
     {
@@ -87,6 +93,22 @@ class Book
     public function setISBN(string $ISBN): void
     {
         $this->ISBN = $ISBN;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageNum(): int
+    {
+        return $this->page_num;
+    }
+
+    /**
+     * @param int $page_num
+     */
+    public function setPageNum(int $page_num): void
+    {
+        $this->page_num = $page_num;
     }
 
     public function year() {
