@@ -87,4 +87,8 @@ class Author
     {
         $this->patronymic = $patronymic;
     }
+
+    public function shortName() {
+        return $this->last_name . ' ' . $this->first_name[0] . '.' . $this->patronymic[0] . '.';
+    }
 }
