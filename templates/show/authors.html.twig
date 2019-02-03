@@ -12,6 +12,7 @@
                 <div class="bg-light px-2 py-1">
                     <p class="text-left">Автор: <h4 class="ml-3"><a href="{{ path('EditAuthor', {'id': author.id}) }}">{{ author.shortName }}</a></h4></p>
                     <p class="text-left">Количество книг: <span>1</span></p>
+                    <a href="{{ path('DeleteAuthor', {'id': author.id}) }}">Удалить автора</a>
                 </div>
             </div>
             {% endfor %}
