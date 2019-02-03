@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% if form is not defined %}
+        <div class="col-12 text-center my-5">
+            Форма не может быть отображена
+        </div>
+    {% else %}
+        <div class="col-12 my-5">
+            {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+            {{ form(form) }}
+        </div>
+    {% endif %}
+{% endblock %}
