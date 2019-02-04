@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
@@ -143,6 +144,6 @@ class Author
 
     public function __construct()
     {
-        $this->publicated_year = new \DateTime();
+        $this->writed_books = new ArrayCollection();
     }
 }
