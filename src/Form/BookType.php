@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,6 +42,11 @@ class BookType extends AbstractType
                     return $author->getId();
                 },
                 'multiple' => true,
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Upload book wrapper',
+                'required' => false,
+                'data' => '',
             ])
             ->add('Save', SubmitType::class)
         ;

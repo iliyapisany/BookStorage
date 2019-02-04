@@ -8,6 +8,7 @@ use App\Form\AuthorType;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,7 +24,7 @@ class EditController extends AbstractController
         /** @var BookRepository $AuthorRepository */
         $BookRepository = $this->getDoctrine()->getRepository(Book::class);
 
-        /** @var Book $Author */
+        /** @var Book $Book */
         $Book = $BookRepository->find($id);
 
         if($Book == null) {
@@ -37,6 +38,16 @@ class EditController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $db = $this->getDoctrine()->getManager();
+
+            /** @var File $File */
+            $File = $Book->getImage();
+
+            $Filename = md5(uniqid()) . '.' . $File->guessExtension();
+
+            $File->move($this->getParameter('book_wrapper_directory'), $Filename);
+
+            $Book->setImage($Filename);
+
             $db->persist($Book);
             $db->flush();
         }
