@@ -28,9 +28,13 @@ class CreateController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $db = $this->getDoctrine()->getManager();
             $db->persist($Book);
-            $db->flush();
-
-            return $this->redirectToRoute('Books');
+            try {
+                $db->flush();
+                return $this->redirectToRoute('Books');
+            }
+            catch (UniqueConstraintViolationException $exception) {
+                $form->addError(new FormError('Книга не может быть создана для указанных данных (повторяющийся ISBN или название + дата издания)'));
+            }
         }
 
         return $this->render('edit/base_create_form.html.twig', [
