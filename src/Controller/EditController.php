@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Form\AuthorType;
-use App\Form\BookType;
+use App\Form\BookEditType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
@@ -32,7 +32,7 @@ class EditController extends AbstractController
         }
 
 
-        $form = $this->createForm(BookType::class, $Book);
+        $form = $this->createForm(BookEditType::class, $Book);
 
         $form->handleRequest($request);
 

@@ -43,11 +43,6 @@ class BookType extends AbstractType
                 },
                 'multiple' => true,
             ])
-            ->add('image', FileType::class, [
-                'label' => 'Upload book wrapper',
-                'required' => false,
-                'data' => '',
-            ])
             ->add('Save', SubmitType::class)
         ;
 
