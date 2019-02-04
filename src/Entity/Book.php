@@ -7,6 +7,14 @@ use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
+ * @ORM\Table(uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *      name="ISBN_unique",
+ *      columns={"ISBN"}),
+ *     @ORM\UniqueConstraint(
+ *      name="NameYearUnique",
+ *      columns={"name", "pulicatedYear"})
+ * })
  */
 class Book
 {
