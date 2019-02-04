@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
@@ -41,10 +42,10 @@ class Book
     private $page_num = 0;
 
     /**
-     * @var array
-     * @ORM\ManyToMany(targetEntity="Author", inversedBy="id")
+     * @var PersistentCollection
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="writed_books")
      */
-    private $authors = [];
+    private $authors;
 
 
     public function getId(): ?int
@@ -122,7 +123,7 @@ class Book
      */
     public function getAuthors(): array
     {
-        return $this->authors;
+        return $this->authors->toArray();
     }
 
     /**
@@ -130,7 +131,10 @@ class Book
      */
     public function setAuthors(array $authors): void
     {
-        $this->authors = $authors;
+        $this->authors->clear();
+        foreach ($authors as $author) {
+            $this->authors[] = $author;
+        }
     }
 
     public function year() {

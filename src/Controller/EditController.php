@@ -15,6 +15,7 @@ class EditController extends AbstractController
 {
     /**
      * @param $id
+     * @param $request Request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/book/{id<\d+>}", name="EditBook")
      */
@@ -48,6 +49,7 @@ class EditController extends AbstractController
 
     /**
      * @param $id
+     * @param $request Request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/author/{id<\d+>}", name="EditAuthor")
      */
@@ -71,6 +73,8 @@ class EditController extends AbstractController
             $db = $this->getDoctrine()->getManager();
             $db->persist($Author);
             $db->flush();
+
+            return $this->redirectToRoute('EditAuthor', ['id' => $id]);
         }
 
         return $this->render('edit/base_create_form.html.twig', [

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
@@ -41,10 +42,10 @@ class Author
     private $patronymic = '';
 
     /**
-     * @var array
-     * @ORM\ManyToMany(targetEntity="Book", mappedBy="id")
+     * @var PersistentCollection
+     * @ORM\ManyToMany(targetEntity="Book", mappedBy="authors")
      */
-    private $writed_books = [];
+    private $writed_books;
 
     /**
      * @return string
@@ -99,7 +100,7 @@ class Author
      */
     public function getWritedBooks(): array
     {
-        return $this->writed_books;
+        return $this->writed_books->toArray();
     }
 
     /**
@@ -107,7 +108,11 @@ class Author
      */
     public function setWritedBooks(array $writed_books): void
     {
-        $this->writed_books = $writed_books;
+        $this->writed_books->clear();
+        foreach ($writed_books as $writed_book) {
+            $this->writed_books[] = $writed_book;
+            $writed_book->setAuthors([$this]);
+        }
     }
 
     public function shortName() {
