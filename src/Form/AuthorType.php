@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Book;
-use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -16,12 +15,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AuthorType extends AbstractType
 {
     private $BookRepository;
-    private $AuthorRepository;
 
-    public function __construct(BookRepository $bookRepository, AuthorRepository $authorRepository)
+    public function __construct(BookRepository $bookRepository)
     {
         $this->BookRepository = $bookRepository;
-        $this->AuthorRepository = $authorRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
