@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <div class="col-12 p-4">
-        {% if is_granted('ROLE_ADMIN') %}
         <div class="row">
             <a href="{{ path('CreateBook') }}" class="text-right col-12">Создать книгу</a>
         </div>
-        {% endif %}
         <div class="row">
             {% for book in Books %}
             <div class="col-12 col-md-4 p-3">
