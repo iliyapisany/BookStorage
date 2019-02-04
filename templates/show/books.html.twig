@@ -11,7 +11,7 @@
             <div class="col-12 col-md-4 p-3">
                 <div class="bg-light p-3">
                     {% set BookEditPath = path('EditBook', {'id': book.id}) %}
-                    <a href="{{ BookEditPath }}"><img src="https://s1.1zoom.ru/b5050/137/371625-svetik_2880x1800.jpg" width="100%"></a>
+                    <a href="{{ BookEditPath }}"><img src="{% if book.image is null %}/images/system/open-book.png{% else %}{{ book.imageUrl }}{% endif %}" width="100%"></a>
                     <a href="{{ BookEditPath }}">
                         <ul class="list-unstyled">
                             <li>&laquo;{{ book.name }}&raquo;</li>
