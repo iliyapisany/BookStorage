@@ -139,10 +139,32 @@ class Book
      */
     public function setAuthors(array $authors): void
     {
-        $this->authors->clear();
-        foreach ($authors as $author) {
-            $this->authors[] = $author;
+        foreach ($this->authors->toArray() as $author) {
+            if(!array_search($author, $authors)) {
+                $this->writed_books->removeElement($author);
+                $author->removeBook($this);
+            }
         }
+        foreach ($authors as $author) {
+            if(!$this->writed_books->contains($author)) {
+                $this->addAuthor($author);
+                $author->addBook($this);
+            }
+        }
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function addAuthor(Author $author) {
+        $this->authors[] = $author;
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function removeAuthor(Author $author) {
+        $this->authors->removeElement($author);
     }
 
     public function year() {

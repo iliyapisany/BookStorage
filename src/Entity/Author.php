@@ -108,14 +108,41 @@ class Author
      */
     public function setWritedBooks(array $writed_books): void
     {
-        $this->writed_books->clear();
-        foreach ($writed_books as $writed_book) {
-            $this->writed_books[] = $writed_book;
-            $writed_book->setAuthors([$this]);
+        foreach ($this->writed_books->toArray() as $writedBook) {
+            if(!array_search($writedBook, $writed_books)) {
+                $this->writed_books->removeElement($writedBook);
+                $writedBook->removeAuthor($this);
+            }
         }
+        foreach ($writed_books as $writed_book) {
+            if(!$this->writed_books->contains($writed_book)) {
+                $this->addBook($writed_book);
+                $writed_book->addAuthor($this);
+            }
+        }
+
+    }
+
+    /**
+     * @param Book $book
+     */
+    public function addBook(Book $book) {
+        $this->writed_books[] = $book;
+    }
+
+    /**
+     * @param Book $book
+     */
+    public function removeBook(Book $book) {
+        $this->writed_books->removeElement($book);
     }
 
     public function shortName() {
         return $this->last_name . ' ' . $this->first_name[0] . '.' . $this->patronymic[0] . '.';
+    }
+
+    public function __construct()
+    {
+        $this->publicated_year = new \DateTime();
     }
 }
