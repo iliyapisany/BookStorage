@@ -14,7 +14,7 @@ use Doctrine\ORM\PersistentCollection;
  *      columns={"ISBN"}),
  *     @ORM\UniqueConstraint(
  *      name="NameYearUnique",
- *      columns={"name", "pulicatedYear"})
+ *      columns={"name", "publicated_year"})
  * })
  */
 class Book
