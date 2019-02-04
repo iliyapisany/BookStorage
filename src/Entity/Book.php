@@ -56,6 +56,11 @@ class Book
      */
     private $authors;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string",length=200,nullable=true)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -166,6 +171,26 @@ class Book
      */
     public function removeAuthor(Author $author) {
         $this->authors->removeElement($author);
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function getImageUrl() {
+        return '/images/books/' . $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
     public function year() {
