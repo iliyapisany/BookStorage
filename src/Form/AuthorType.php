@@ -38,6 +38,7 @@ class AuthorType extends AbstractType
                     return $book ? $book->getId() : '';
                 },
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('Save', SubmitType::class);
         ;
