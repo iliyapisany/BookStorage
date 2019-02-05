@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
@@ -29,30 +30,41 @@ class Book
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string", message="Должно быть строкой")
+     * @Assert\Length(max="255", maxMessage="Не длинее 255 символов", min="1", minMessage="Должно содержать символы")
      */
     private $name = '';
 
     /**
      * @var \DateTime
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Type(type="object", message="Дата в формате  (yyyy-mm-dd)")
      */
     private $publicated_year = 0;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string", message="ISBN")
+     * @Assert\Length(min="6", minMessage="Не менее 6 символов", max="20", maxMessage="Не более 20 символов")
      */
     private $ISBN = '';
 
     /**
      * @var int
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
      */
     private $page_num = 0;
 
     /**
      * @var PersistentCollection
      * @ORM\ManyToMany(targetEntity="Author", inversedBy="writed_books")
+     * @Assert\Type(type="object", message="Множество авторов")
      */
     private $authors;
 
