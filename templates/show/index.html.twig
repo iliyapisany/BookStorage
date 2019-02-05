@@ -5,7 +5,7 @@
         <h3 class="col-12 text-center">Популярные книги</h3>
         {% for book in Books %}
         <div class="col-1 col-md-4 col-lg-2 m-3 pt-1 bg-light">
-            <img src="https://images5.alphacoders.com/284/thumb-1920-284379.jpg" width="100%">
+            <img src="{% if book.image is null %}/images/system/open-book.png{% else %}{{ book.imageUrl }}{% endif %}" width="100%">
             <div>
                 <p>{{ book.name }}</p>
                 <p>Авторы:</p>
