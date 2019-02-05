@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
@@ -27,24 +28,33 @@ class Author
     /**
      * @var string
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string", message="Должно быть строкой")
+     * @Assert\Length(max="30", maxMessage="Должно быть не длинее 30 символов", min="2", minMessage="Должно быть не короче 2 символов")
      */
     private $last_name = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string", message="Должно быть строкой")
+     * @Assert\Length(max="20", maxMessage="Должно быть не длиннее 20 символов", min="2", minMessage="Должно быть не короче 2 симовлов")
      */
     private $first_name = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=23)
+     * @Assert\Type(type="string", message="Должне быть строкой")
+     * @Assert\Length(max="23", maxMessage="Не должно быть длинее 23 символов")
      */
     private $patronymic = '';
 
     /**
      * @var PersistentCollection
      * @ORM\ManyToMany(targetEntity="Book", mappedBy="authors")
+     * @Assert\Type(type="object", message="Множество написаных книг")
      */
     private $writed_books;
 
