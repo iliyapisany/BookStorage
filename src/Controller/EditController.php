@@ -44,11 +44,14 @@ class EditController extends AbstractController
             /** @var File $File */
             $File = $Book->getImage();
 
-            $Filename = md5(uniqid()) . '.' . $File->guessExtension();
+            if($File != null) {
 
-            $File->move($this->getParameter('book_wrapper_directory'), $Filename);
+                $Filename = md5(uniqid()) . '.' . $File->guessExtension();
 
-            $Book->setImage($Filename);
+                $File->move($this->getParameter('book_wrapper_directory'), $Filename);
+
+                $Book->setImage($Filename);
+            }
 
             $db->persist($Book);
             try
