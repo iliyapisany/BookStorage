@@ -7,7 +7,9 @@ use App\Entity\Book;
 use App\Form\AuthorType;
 use App\Form\BookEditType;
 use App\Repository\BookRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,7 +51,14 @@ class EditController extends AbstractController
             $Book->setImage($Filename);
 
             $db->persist($Book);
-            $db->flush();
+            try
+            {
+                $db->flush();
+                return $this->redirectToRoute('EditBook', ['id' => $id]);
+            }
+            catch (UniqueConstraintViolationException $exception) {
+                $form->addError(new FormError('Недопустимые значения полей'));
+            }
         }
 
         return $this->render('edit/base_create_form.html.twig', [
@@ -83,7 +92,14 @@ class EditController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $db = $this->getDoctrine()->getManager();
             $db->persist($Author);
-            $db->flush();
+
+            try{
+                $db->flush();
+                return $this->redirectToRoute('EditAuthor', ['id' => $id]);
+            }
+            catch (UniqueConstraintViolationException $exception) {
+                $form->addError(new FormError('Недопустимые значения полей'));
+            }
 
             return $this->redirectToRoute('EditAuthor', ['id' => $id]);
         }
